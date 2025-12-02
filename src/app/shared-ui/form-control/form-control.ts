@@ -1,15 +1,22 @@
-import { Component, input, ViewEncapsulation } from '@angular/core';
+import { Component, ContentChild, ElementRef, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'app-form-control',
-  imports: [],
-  templateUrl: './form-control.html',
-  styleUrl: './form-control.css',
-  encapsulation: ViewEncapsulation.None,
-  host: {
-    class: 'control'
-  }
+    selector: 'app-form-control',
+    imports: [],
+    templateUrl: './form-control.html',
+    styleUrl: './form-control.css',
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        class: 'control',
+        '(click)': 'onClick()',
+    },
 })
 export class FormControlComponent {
-  label = input.required<string>()
+    @ContentChild('input') inputElement?: ElementRef<HTMLInputElement | HTMLTextAreaElement>;
+
+    label = input.required<string>();
+
+    onClick() {
+        console.log(this.inputElement);
+    }
 }
